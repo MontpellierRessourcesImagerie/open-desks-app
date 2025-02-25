@@ -1,7 +1,11 @@
 
 <?php
-    include("./db.php");
-    include("./extract_sessions.php");
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    include("db.php");
+    include("extract-sessions.php");
     global $_TIME_START, $_TIME_END, $_RDV_DURATION;
 
     $pdo          = connect_db();
@@ -19,8 +23,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open-desks MRI-CIA</title>
-    <link rel="stylesheet" type="text/css" href="./index/style-desktop.css">
-    <link rel="stylesheet" type="text/css" href="./index/style-mobile.css">
+    <link rel="stylesheet" type="text/css" href="index-style-desktop.css">
+    <link rel="stylesheet" type="text/css" href="index-style-mobile.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lilita+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yaldevi">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/medias/logo-mri.png">
@@ -74,7 +78,7 @@
             </div>
         </div>
 
-        <form action="./confirm.php" method="POST" enctype="multipart/form-data" id="booking_form">
+        <form action="./appointment-confirm.php" method="POST" enctype="multipart/form-data" id="booking_form">
             <table>
                 <tr>
                     <td>
@@ -101,7 +105,7 @@
             <select id="appointmentTime" name="appointmentTime" required></select><br>
             
             <label for="reason">How can we help you?</label>
-            <textarea id="reason" name="reason" rows="12" cols="50"></textarea><br>
+            <textarea id="reason" name="reason" rows="12" cols="50" placeholder="Max 8192 characters."></textarea><br>
 
             <label id="lbl_data_link" for="dataLink">Attach a <a href="https://filesender.renater.fr/">FileSender</a> link or an SFTP path:</label><br>
             <input type="text" id="dataLink" name="dataLink"><br>
@@ -175,10 +179,10 @@
 
             <tr>
                 <td>
-                    <a href="./control-panel.php"><img alt="Control panel gear icon" src="./data/medias/gear-icon.png"/></a>
+                    <a href="control-panel.php"><img alt="Control panel gear icon" src="./data/medias/gear-icon.png"/></a>
                 </td>
                 <td>
-                    <a href="./control-panel.php">Control panel</a>
+                    <a href="control-panel.php">Control panel</a>
                 </td>
             </tr>
 
@@ -192,8 +196,8 @@
             "appointments": <?php echo $appointments; ?>
         }
     </script>
-    <script id="finish-js" type="text/javascript" src="./index/builder.js"></script>
-    <script id="events-js" type="text/javascript" src="./index/event-listeners.js"></script>
+    <script id="finish-js" type="text/javascript" src="index-builder.js"></script>
+    <script id="events-js" type="text/javascript" src="index-event-listeners.js"></script>
 
 </body>
 </html>

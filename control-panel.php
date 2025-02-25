@@ -4,9 +4,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("./db.php");
-include("./extract_sessions.php");
-include("./ensure-connect.php");
+include("db.php");
+include("extract-sessions.php");
+include("connect-ensure.php");
 
 /**
  * Fetches the appointments from the database.
@@ -59,7 +59,7 @@ function get_detailed_appointments($pdo) {
 $pdo = connect_db();
 
 // Ensures that the user is connected.
-requireAuthentication($pdo, "./control-panel.php");
+requireAuthentication($pdo, "control-panel.php");
 
 $sessionData    = json_encode(get_sessions_map($pdo, true));
 $sessionDetails = json_encode(get_detailed_appointments($pdo));
@@ -83,7 +83,7 @@ $pdo = null;
 <html>
 <head>
     <title>OD Control Panel</title>
-    <link rel="stylesheet" type="text/css" href="./cp.css">
+    <link rel="stylesheet" type="text/css" href="control-panel-style-desktop.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lilita+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yaldevi">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/medias/logo-mri.png">
@@ -96,7 +96,7 @@ $pdo = null;
         </div>
         <div id="nb_buttons">
             <div class="nb_btn" id="user-info"></div>
-            <button class="nb_btn" id="download"><a href="./download-report.php">Download CSV</a></button>
+            <button class="nb_btn" id="download"><a href="control-panel-download-report.php">Download CSV</a></button>
             <button class="nb_btn" id="logout">
                 <img alt="onoff" src="./data/medias/on-off.png" id="onoff" />
             </button>
@@ -129,7 +129,7 @@ $pdo = null;
     <h2>New session</h2>
 
     <div id="new_session">
-        <form id="new_session_form" action="./confirm-session.php" method="POST" enctype="multipart/form-data">
+        <form id="new_session_form" action="control-panel-confirm-session.php" method="POST" enctype="multipart/form-data">
             <div class="input-group">
                 <label for="session_date">Date</label>
                 <input type="date" id="session_date" name="session_date" required>
@@ -158,7 +158,7 @@ $pdo = null;
         const sessionDetails = <?php echo $sessionDetails; ?>;
         const userData       = <?php echo $userData; ?>;
     </script>
-    <script type="text/javascript" src="./finish-cp.js"></script>
+    <script type="text/javascript" src="control-panel-finish.js"></script>
 
 </body>
 </html>

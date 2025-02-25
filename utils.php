@@ -69,4 +69,13 @@ function requiredData($fields) {
     return true;
 }
 
+function isSafeFile($target) {
+    if ($target === null) {
+        return true;
+    }
+    $r_path = realpath($target);
+    $s_path = realpath("..");
+    return str_starts_with($r_path, $s_path);
+}
+
 ?>

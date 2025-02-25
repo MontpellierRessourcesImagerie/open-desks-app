@@ -1,6 +1,6 @@
 <?php
 
-include("./config-db.php");
+include("db-config.php");
 
 function connect_db() {
     global $_CONFIG_DB;
