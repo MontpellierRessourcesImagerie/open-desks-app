@@ -1,0 +1,123 @@
+body {
+    font-family: "Yaldevi";
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-size: 1.3em;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.confirm {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border-left: 6px solid #4cae4c;
+}
+
+.error {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f0d8d8;
+    color: #763c3c;
+    border-left: 6px solid #ae4c4c;
+}
+
+.already {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #d8e5f0;
+    color: #3c5f76;
+    border-left: 6px solid #4c8aae;
+}
+
+#qr_box {
+    padding: 20px;
+    background-color: #f2e8de;
+    color: #a96b42;
+    border-left: 6px solid #d4963a;
+    display: none;
+    margin-bottom: 30px;
+}
+
+#qr_box strong {
+    color: #a96b42;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.btn>a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#ics_download {
+    background-color: #5bff5b;
+    color: #ffffff;
+}
+
+#ics_download:hover {
+    background-color: #1dff1d;
+}
+
+#qr_button:hover {
+    background-color: #c9802c;
+}
+
+#qr_button {
+    background-color: #d9824f;
+    color: #ffffff;
+}
+
+#home_btn {
+    background-color: #5baaff;
+    color: #ffffff;
+}
+
+#home_btn:hover {
+    background-color: #1d8aff;
+}
+
+#date_block {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.0em;
+    font-weight: bolder;
+    display: block;
+    margin-left: 40px;
+    /* text-align: center; */
+}
+
+#calendar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4cb821;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+#calendar:hover {
+    background-color: #32851d;
+}

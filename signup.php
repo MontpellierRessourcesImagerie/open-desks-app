@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OD Sign-up</title>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Yaldevi:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./signup-connect/connect-style.css">
+    <link rel="stylesheet" href="connect-style.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./data/medias/logo-mri.png">
 </head>
 <body>

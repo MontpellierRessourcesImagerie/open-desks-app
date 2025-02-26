@@ -1,0 +1,382 @@
+:root {
+    --mri-green: #00db00;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+#title {
+    width: 100%;
+    text-align: center;
+    /* border-top: solid 30px var(--mri-green); */
+}
+
+#title>span {
+    font-family: "Lilita One";
+    font-size: 6em;
+    display: inline-block;
+}
+
+#title>span:last-child {
+    font-size: 3em;
+    border-bottom: solid 5px var(--mri-green);
+    padding-bottom: 10px;
+}
+
+h2 {
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: var(--mri-green);
+    color: white;
+    display: inline-block;
+    margin-top: 75px;
+    font-size: 1.5em;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+}
+
+#download {
+    background-color:#eee;
+    color: #111;
+}
+
+#download:hover {
+    background-color: white;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.u_link {
+    padding-left: 3px;
+    padding-right: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 5px;
+    border: solid 1px rgb(200, 200, 200);
+    text-decoration: none;
+}
+
+.data_link {
+    color: black;
+    background-color: rgb(250, 250, 255);
+}
+
+.no_data {
+    color: rgb(150, 150, 150);
+    background-color: rgb(245, 245, 245);
+}
+
+#appointments {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.appointment {
+    font-size: 1em;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px;
+    width: 80%;
+}
+
+p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.u_attr, .problem {
+    font-weight: bold;
+}
+
+.u_contact, .u_affiliation, .u_data, .u_problem {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.1em;
+}
+
+.u_name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+.email {
+    font-size: 1.2em;
+    color: #777;
+}
+
+.institute {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #666;
+}
+
+.time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff5722;
+}
+
+.u_link {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.no_data {
+    color: red;
+}
+
+.data_link {
+    color: green;
+    text-decoration: none;
+}
+
+.problem {
+    background: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.problem>span {
+    font-size: 1.3em;
+    font-weight: normal;
+}
+
+.nothing {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* General form container */
+#new_session {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form structure */
+#new_session_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input group styling */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Input fields */
+.input-group input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Input focus effect */
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button */
+#button_new_session {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#button_new_session:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    #new_session {
+        max-width: 90%;
+        padding: 15px;
+    }
+}
+
+#errorBox {
+    border: solid 4px #cd1818;
+    background-color: rgb(255, 181, 181);
+    border-radius: 4px;
+    text-align: center;
+    display: none;
+    padding: 10px;
+}
+
+
+
+/* ---------- */
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--mri-green);
+    padding: 10px 20px;
+    position: relative;
+    height: 80px;
+}
+
+#logo-container img {
+    height: 150px;
+    cursor: pointer;
+    z-index: 1;
+    transform: translate(25px, -25px);
+    border: solid 10px white;
+    border-radius: 80px;
+    position: absolute;
+    background-color: white;
+}
+
+#navbar #user-info {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#navbar #nb_buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nb_btn {
+    padding: 12px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.nb_btn#logout {
+    background-color: red;
+    color: white;
+    border-radius: 30px;
+    filter: grayscale(25%);
+    border: solid 2px red;
+}
+
+.nb_btn#logout:hover {
+    filter: grayscale(0%);
+}
+
+#onoff {
+    width: 25px;
+}
+
+.nb_btn#dark-mode {
+    background-color: black;
+    color: white;
+}
+
+#users-list, #sessions_list {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#user-table, #sessions {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#user-table th, #user-table td, #sessions th, #sessions td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#user-table th, #sessions th {
+    background-color: #333;
+    color: white;
+}
+
+#user-table tr:hover, #sessions tr:hover {
+    background-color: #f5f5f5;
+}
+
+.btn-accept {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-revoke {
+    background-color: rgb(255, 158, 14);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-accept:hover {
+    background-color: darkgreen;
+}
+
+.btn-revoke:hover {
+    background-color: rgb(218, 123, 0);
+}
+
+.btn-delete {
+    background-color: rgb(255, 83, 83);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-delete:hover {
+    background-color: rgb(255, 0, 0);
+}

@@ -1,0 +1,112 @@
+@media (max-width: 950px) {
+    #navbar {
+        display: flex;
+        height: 20px;
+    }
+    
+    #logo_container {
+        width: 100%;
+    }
+
+    #logo_container img {
+        position: relative;
+        height: 35px;
+        width: 35px;
+        transform: none;
+        border: solid 8px white;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #title>span:first-child {
+        font-size: 4em;
+    }
+
+    #title>span:last-child {
+        font-size: 2em;
+    }
+
+    #introduction {
+        width: 100%;
+        padding: 0;
+        margin-top: 65px;
+    }
+
+    #upcoming {
+        margin-top: 25px;
+    }
+
+    #intro_list::-webkit-scrollbar {
+        display: none;
+    }
+
+    #intro_list {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #intro_list {
+        -ms-overflow-style: none;
+    }
+    
+    #intro_list {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        transform: none;
+        border-left: none;
+        list-style-type: none;
+        overflow-x: auto;
+        box-shadow: none;
+    }
+
+    .intro_line {
+        font-size: 1.5em;
+        flex: 0 0 80%; 
+        height: 180px;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-top: solid 15px var(--mri-green);
+        color: black;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        scroll-snap-align: center;
+        transition: transform 0.3s ease-in-out;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #sessions {
+        scroll-snap-align: center;
+    }
+
+    #sessions::-webkit-scrollbar {
+        display: none;
+    }
+
+    #sessions {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #sessions {
+        -ms-overflow-style: none;
+    }
+
+    #pinpoint {
+        height: 40px;
+        padding: 2px;
+    }
+
+    #details {
+        margin-left: 0;
+    }
+}
