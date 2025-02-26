@@ -21,7 +21,8 @@ $fields = [
     'institute', 
     'appointmentTime', 
     'reason',
-    'sessionID'
+    'sessionID',
+    'company'
 ];
 
 if (!requiredData($fields)) { exit; }

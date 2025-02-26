@@ -64,6 +64,7 @@ function validateForm() {
     let reason     = document.getElementById('reason').value;
     let fs_link    = document.getElementById('dataLink').value;
     let no_d       = document.getElementById('noData').checked;
+    let honey_pot  = document.getElementById('company').value;
 
     if (!isValidFirstName(first_name)) { return "First name missing."; }
     if (!isValidFirstName(last_name))  { return "Last name missing."; }
@@ -73,6 +74,7 @@ function validateForm() {
     if (!validReason(reason, 8192))    { return "Problem description missing or too long."; }
     if (!isValidTime(app_time))        { return "Invalid time slot selected."; }
     if (!isValidURL(fs_link, no_d))    { return "Invalid data link. Check 'I will come with a USB drive' if this is intended."; }
+    if (containsSomething(honey_pot))  { return "You are a robot."; }
 
     return "";
 }
