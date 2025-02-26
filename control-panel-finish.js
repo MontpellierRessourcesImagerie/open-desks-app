@@ -108,7 +108,7 @@ function createAppointmentBlock(data) {
         dataLink.href = data['images_link'];
         dataLink.target = "_blank";
         dataLink.classList.add("data_link");
-        dataLink.innerHTML = "🔗 images";
+        dataLink.innerHTML = "🔗 " + data['images_link'];
         dataSpan.appendChild(dataLink);
     } else {
         dataSpan.classList.add("no_data");
