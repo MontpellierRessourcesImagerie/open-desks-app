@@ -92,15 +92,15 @@ function isValidTime($time) {
  * @return bool True if all the fields are valid, false otherwise.
  */
 function checkValidity() {
-    if (!isValidFirstName($_POST['first_name']))                           { echo $_POST['first_name']; return false; }
-    if (!isValidLastName($_POST['last_name']))                             { echo $_POST['last_name']; return false; }
-    if (!isValidEmail($_POST['email']))                                    { echo $_POST['email']; return false; }
-    if (!containsSomething($_POST['team']))                                { echo $_POST['team']; return false; }
-    if (!containsSomething($_POST['institute']))                           { echo $_POST['institute']; return false; }
-    if (!isValidTime($_POST['appointmentTime']))                           { echo $_POST['appointmentTime']; return false; }
-    if (!isValidReason($_POST['reason'], 8192))                            { echo $_POST['reason']; return false; }
-    if (isset($_POST['dataLink']) && !isValidLink($_POST['dataLink']))     { echo $_POST['dataLink']; return false; }
-    if (isset($_POST['company']) && !containsSomething($_POST['company'])) { echo $_POST['company']; return false; }
+    if (!isValidFirstName($_POST['first_name']))                          { echo $_POST['first_name']; return false; }
+    if (!isValidLastName($_POST['last_name']))                            { echo $_POST['last_name']; return false; }
+    if (!isValidEmail($_POST['email']))                                   { echo $_POST['email']; return false; }
+    if (!containsSomething($_POST['team']))                               { echo $_POST['team']; return false; }
+    if (!containsSomething($_POST['institute']))                          { echo $_POST['institute']; return false; }
+    if (!isValidTime($_POST['appointmentTime']))                          { echo $_POST['appointmentTime']; return false; }
+    if (!isValidReason($_POST['reason'], 8192))                           { echo $_POST['reason']; return false; }
+    if (isset($_POST['dataLink']) && !isValidLink($_POST['dataLink']))    { echo $_POST['dataLink']; return false; }
+    if (isset($_POST['company']) && containsSomething($_POST['company'])) { echo $_POST['company']; return false; }
     return true;
 }
 
