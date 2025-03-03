@@ -41,6 +41,13 @@ h2 {
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
 }
 
+#nb_buttons a {
+    text-decoration: none;
+    color: black;
+    height: 100%;
+    margin-top: 5px;
+}
+
 #download {
     background-color:#eee;
     color: #111;
@@ -48,11 +55,6 @@ h2 {
 
 #download:hover {
     background-color: white;
-    color: black;
-}
-
-a {
-    text-decoration: none;
     color: black;
 }
 

@@ -16,6 +16,7 @@
     $timeSlots    = json_encode(make_laps($_TIME_START, $_TIME_END, $_RDV_DURATION), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
     $sessionsData = json_encode($sessionData, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
     $appointments = json_encode($appointments, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    $n_sessions   = count($sessionData);
 ?>
 
 
@@ -57,6 +58,8 @@
             <li class="intro_line">We can help you get your <b>hands on analysis softwares</b><span> (e.g. ImageJ/Fiji, QuPath, Huygens, Imaris, CellPose, ...)</span>.</li>
         </ul>
     </div>
+
+    <?php if ($n_sessions > 0): ?>
 
     <!-- SESSIONS LIST -->
     <div id="upcoming">
@@ -128,6 +131,12 @@
           </div>
 
     </div>
+
+    <?php else: ?>
+
+    <div class='nothing'>🔍 There is no session planed for now</div>
+
+    <?php endif; ?>
 
     <!-- LINKS -->
     <div id="links">

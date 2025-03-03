@@ -82,6 +82,16 @@ html, body {
 
 /* --- Sessions --- */
 
+.nothing {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #777;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
 #upcoming {
     text-align: center;
     margin-top: 70px;

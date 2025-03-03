@@ -16,7 +16,7 @@ fputcsv($output, ["Session Date", "Session Location", "Engineers", "User Email",
 $query = $pdo->query("
     SELECT 
         s.session_date,
-        s.session_location,
+        l.location_name,
         s.n_engineers,
         u.email,
         u.first_name,
@@ -28,6 +28,7 @@ $query = $pdo->query("
     FROM sessions s
     INNER JOIN appointments a ON s.session_date = a.session_id
     INNER JOIN users u ON a.user_id = u.email
+    INNER JOIN locations l ON s.session_location = l.location_id
     ORDER BY s.session_date, a.time_start
 ");
 

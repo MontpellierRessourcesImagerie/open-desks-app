@@ -127,7 +127,6 @@ unset($_POST);
         <script text="text/javascript">
             var validity = '<?php echo json_encode($validity) ?>';
         </script>
-
         <script type="text/javascript" src="signup-confirm.js"></script>
     </div>
 

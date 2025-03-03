@@ -110,7 +110,7 @@ $pdo = null;
         </div>
         <div id="nb_buttons">
             <div class="nb_btn" id="user-info"></div>
-            <button class="nb_btn" id="download"><a href="control-panel-download-report.php">Download CSV</a></button>
+            <a href="control-panel-download-report.php"><button class="nb_btn" id="download">Download CSV</button></a>
             <button class="nb_btn" id="logout">
                 <img alt="onoff" src="./data/medias/on-off.png" id="onoff" />
             </button>
@@ -130,6 +130,7 @@ $pdo = null;
     <h2>Appointments</h2>
 
     <div id="appointments">
+        <div class='nothing'>🔍 No appointment yet.</div>
     </div>
 
     <h2>Locations</h2>

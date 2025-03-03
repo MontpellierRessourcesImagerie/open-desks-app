@@ -153,7 +153,7 @@ function createAppointmentBlock(data) {
 function reset_appointments(root, details) {
     root.innerHTML = "";
     if (details === undefined) {
-        root.innerHTML = "<div class='nothing'>🔍 Nothing here!</div>";
+        root.innerHTML = "<div class='nothing'>🔍 Nothing appointments for this session!</div>";
     } else {
         details.forEach(data => {
             root.appendChild(createAppointmentBlock(data));
@@ -212,7 +212,7 @@ function unpack_sessions(sessions, appointments) {
     root.innerHTML = "";
 
     if (sessions.length === 0) {
-        root.innerHTML = "<div class='nothing'>🔍 Nothing here!</div>";
+        root.innerHTML = "<div class='nothing'>🔍 No session planed yet.</div>";
         return;
     }
 
@@ -351,7 +351,7 @@ function fetchUsers() {
             userListDiv.innerHTML = "";
 
             if (users.length === 0) {
-                userListDiv.innerHTML = "<div class='nothing'>🔍 Nothing here!</div>";
+                userListDiv.innerHTML = "<div class='nothing'>🔍 No users yet.</div>";
                 return;
             }
 
