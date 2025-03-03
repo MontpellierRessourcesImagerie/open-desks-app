@@ -171,12 +171,23 @@ function addUserAndAppointment($pdo) {
  */
 function getInfos($pdo) {
     global $monthsList; 
-    $stmt = $pdo->prepare("SELECT session_location FROM sessions WHERE session_date = ?");
+
+    // Requête avec jointure pour récupérer le `location_name`
+    $stmt = $pdo->prepare("
+        SELECT l.location_name 
+        FROM sessions s
+        JOIN locations l ON s.session_location = l.location_id
+        WHERE s.session_date = ?
+    ");
+
     $stmt->execute([$_POST['sessionID']]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if ($row === false) { return ""; }
+
     $litteral_date = makeLitteralDate($_POST['sessionID']);
-    return $litteral_date . ";" . $_POST['appointmentTime'] . ";" . $row['session_location'] . ";" . $_POST['sessionID'];
+    return $litteral_date . ";" . $_POST['appointmentTime'] . ";" . $row['location_name'] . ";" . $_POST['sessionID'];
 }
+
 
 ?>
