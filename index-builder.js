@@ -79,7 +79,9 @@ function update_n_attendees(appointments, timeSlots, sessionID, n_engineers) {
     dropdown.options.length = 0;
     for (let i = 0 ; i < timeSlots.length ; i++) {
         let new_option = document.createElement('option');
-        new_option.text = timeSlots[i] + " - (" + appointments[sessionID][i] + "/" + n_engineers + " booked)";
+        let n_rdv = appointments[sessionID][i];
+        let prs_ppl = n_rdv > 1 ? "people" : "person";
+        new_option.text = timeSlots[i] + " - (already " + n_rdv + " " + prs_ppl + " for " + n_engineers + " engineers)";
         new_option.value = timeSlots[i];
         dropdown.add(new_option);
     }
