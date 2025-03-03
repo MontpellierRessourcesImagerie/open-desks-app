@@ -170,7 +170,7 @@ p {
 }
 
 /* General form container */
-#new_session {
+#new_session, #locations {
     max-width: 400px;
     margin: 30px auto;
     padding: 20px;
@@ -180,7 +180,7 @@ p {
 }
 
 /* Form structure */
-#new_session_form {
+#new_session_form, #locations_form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -199,7 +199,7 @@ p {
 }
 
 /* Input fields */
-.input-group input {
+.input-group input, select{
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -215,7 +215,7 @@ p {
 }
 
 /* Submit button */
-#button_new_session {
+#button_new_session, #button_location {
     padding: 12px;
     background-color: #007bff;
     color: white;
@@ -227,7 +227,7 @@ p {
     transition: background 0.3s;
 }
 
-#button_new_session:hover {
+#button_new_session:hover, #button_location:hover {
     background-color: #0056b3;
 }
 
@@ -239,7 +239,7 @@ p {
     }
 }
 
-#errorBox {
+#errorBox, #locationErrorBox {
     border: solid 4px #cd1818;
     background-color: rgb(255, 181, 181);
     border-radius: 4px;

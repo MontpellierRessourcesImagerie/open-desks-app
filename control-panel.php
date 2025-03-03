@@ -56,6 +56,19 @@ function get_detailed_appointments($pdo) {
     return $result;
 }
 
+function get_locations(PDO $pdo) {
+    $sql = "SELECT location_id, location_name FROM locations";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    $locations = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $locations[$row['location_id']] = $row['location_name'];
+    }
+
+    return $locations;
+}
+
 $pdo = connect_db();
 
 // Ensures that the user is connected.
@@ -64,6 +77,7 @@ requireAuthentication($pdo, "control-panel.php");
 $sessionData    = json_encode(get_sessions_map($pdo, true));
 $sessionDetails = json_encode(get_detailed_appointments($pdo));
 $userData       = json_encode(getAuthenticatedUser($pdo));
+$locations      = json_encode(get_locations($pdo));
 
 /**
  * Used to prevent the user to create a session in the past.
@@ -112,18 +126,24 @@ $pdo = null;
     <h2>Active sessions</h2>
 
     <div id="sessions_list"></div>
-    <!--<table id="sessions">
-        <tr>
-            <td>Date</td>
-            <td>Location</td>
-            <td># engineers</td>
-            <td>Delete</td>
-        </tr>
-    </table>-->
 
     <h2>Appointments</h2>
 
     <div id="appointments">
+    </div>
+
+    <h2>Locations</h2>
+
+    <div id="locations">
+        <form id="locations_form" method="POST">
+            <div class="input-group">
+                <label for="new_location">New location</label>
+                <input type="text" id="new_location" name="new_location" required>
+            </div>
+            <button id="button_location" type="submit">Add</button>
+        </form>
+        <span id="locationErrorBox">
+        </span>
     </div>
 
     <h2>New session</h2>
@@ -136,7 +156,8 @@ $pdo = null;
             </div>
             <div class="input-group">
                 <label for="location">Location</label>
-                <input type="text" id="location" name="location" required>
+                <select id="location" name="location" required>
+                </select>
             </div>
             <div class="input-group">
                 <label for="nb_engineers">Number of engineers</label>
@@ -157,6 +178,7 @@ $pdo = null;
         const sessionData    = <?php echo $sessionData; ?>;
         const sessionDetails = <?php echo $sessionDetails; ?>;
         const userData       = <?php echo $userData; ?>;
+        const locations      = <?php echo $locations; ?>;
     </script>
     <script type="text/javascript" src="control-panel-finish.js"></script>
 

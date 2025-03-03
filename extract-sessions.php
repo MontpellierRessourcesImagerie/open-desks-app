@@ -19,15 +19,16 @@ include("utils.php");
  *    - year: The year of the session.
  */
 function get_sessions_map($pdo, $includePassed=false) {
-    $sql = "SELECT session_date, session_location, n_engineers 
-            FROM sessions ";
-    
-    if (!$includePassed) { // Include passed sessions?
-        $sql .= "WHERE session_date >= CURDATE() ";
+    $sql = "SELECT s.session_date, l.location_name, s.n_engineers 
+            FROM sessions s
+            JOIN locations l ON s.session_location = l.location_id ";
+
+    if (!$includePassed) { // Inclure les sessions passées ?
+        $sql .= "WHERE s.session_date >= CURDATE() ";
     }
 
-    $sql .= "ORDER BY session_date ASC";
-    
+    $sql .= "ORDER BY s.session_date ASC";
+
     try {
         $stmt = $pdo->query($sql);
         $sessions = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +41,7 @@ function get_sessions_map($pdo, $includePassed=false) {
         $date = $session['session_date'];
         $datetime = new DateTime($date);
         $result[$date] = [
-            'location'    => $session['session_location'],
+            'location'    => $session['location_name'], // Utilisation du location_name au lieu de l'ID
             'n_engineers' => (int) $session['n_engineers'],
             'day'         => (int) $datetime->format('d'),
             'month'       => (int) $datetime->format('m'),
@@ -50,6 +51,7 @@ function get_sessions_map($pdo, $includePassed=false) {
 
     return $result;
 }
+
 
 
 /**

@@ -29,9 +29,26 @@ function main() {
         console.error("No user data found.");
         return;
     }
+    if (typeof(locations) !== "object") {
+        console.error("No locations data found.");
+        return;
+    }
     unpack_sessions(sessionData, sessionDetails);
     showUserDetails(userData);
     fetchUsers();
+    showLocations(locations);
+}
+
+function showLocations(locs) {
+    let target = document.getElementById("location");
+    target.innerHTML = "";
+    // Loc is a map ID => Name. The name must be displayed and the ID should be the value
+    for (const [id, name] of Object.entries(locs)) {
+        let option = document.createElement("option");
+        option.value = id;
+        option.textContent = name;
+        target.appendChild(option);
+    }
 }
 
 function showUserDetails(usrInfo) {
@@ -260,6 +277,14 @@ function removeSession(session_id) {
     }
 }
 
+function validateNewLocation(locationInput) {
+    const locationRegex = /\(.*\)$/;
+    if (!locationRegex.test(locationInput)) {
+        return "Location must include a place in parentheses (e.g., 'Room Marcel Doree (CRBM)').";;
+    }
+    return "";
+}
+
 function validateDate(dateInput) {
     const selectedDate = new Date(dateInput);
     const today = new Date();
@@ -271,9 +296,9 @@ function validateDate(dateInput) {
 }
 
 function validateLocation(locationInput) {
-    const locationRegex = /\(.*\)$/;
-    if (!locationRegex.test(locationInput)) {
-        return "Location must include a place in parentheses (e.g., 'Room Marcel Doree (CRBM)').";;
+    const locationID = parseInt(locationInput, 10);
+    if (isNaN(locationID) || locationID < 0) {
+        return "The location ID is invalid";
     }
     return "";
 }
@@ -298,6 +323,17 @@ function validateForm() {
 
 function setError(errorMessage) {
     target = document.getElementById("errorBox");
+    isError = errorMessage.length > 0;
+    if (isError) {
+        target.style.display = "block";
+        target.innerHTML = errorMessage;
+    } else {
+        target.style.display = "none";
+    }
+}
+
+function setErrorLocation(errorMessage) {
+    target = document.getElementById("locationErrorBox");
     isError = errorMessage.length > 0;
     if (isError) {
         target.style.display = "block";
@@ -413,6 +449,35 @@ function toggleUser(username, newStatus) {
       })
       .catch(error => console.error("Error updating user status:", error));
 }
+
+function addNewLocation(locationName) {
+    const formData = new FormData();
+    formData.append("location_name", locationName);
+    fetch("control-panel-update-locations.php", {
+        method: "POST",
+        body: formData
+    }).then(response => response.json())
+      .then(result => {
+          if (result.success) {
+              window.location.reload();
+          }
+      })
+      .catch(error => console.error("Error updating locations list:", error));
+}
+
+document.getElementById("button_location").addEventListener("click", function (event) {
+    const value = document.getElementById("new_location").value;
+    errorMessage = validateNewLocation(value);
+    setErrorLocation(errorMessage);
+    if (errorMessage.length > 0) {
+        return;
+    }
+    addNewLocation(value);
+});
+
+document.getElementById("new_location").addEventListener("input", function(event) {
+    setErrorLocation(validateNewLocation(event.target.value));
+});
 
 document.getElementById("new_session_form").addEventListener("submit", function (event) {
     event.preventDefault();

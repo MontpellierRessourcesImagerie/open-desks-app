@@ -1,17 +1,27 @@
 TO-DO:
-------
+======
 
+Important:
+----------
+
+- Ajouter une table pour les localisations.
+- Ajouter un système de role (admin et regular).
 - Utiliser la fonction "requiredData" dans tous les PHP, ainsi que le 'isset($_POST)'.
 - Ajouter des commentaires dans le code.
 - Écrire la documentation de l'application.
 - Vérifier le système de fonctionnement de la connexion, et des fins de connexion.
 - Changer les injections PHP direct dans le JS en requêtes AJAX.
-- Séparer le code qui fini la page (depuis PHP), le code qui ajoute les callbacks, ...
 - Ajouter la possibilité de pouvoir afficher une annonce dans le bandeau depuis le control-panel.
 - Ne pas pouvoir se supprimer soi-même de la liste des engineers.
-- Mettre un "pointer: cursor" dans la liste des sessions sur le control-panel.
 - Masquer le formulaire de booking si la liste d'open-desks est vide.
-- Mettre un numéro de version dans le control-panel pour suivre l'évolution de l'application.
 - Pouvoir changer la localisation d'une session depuis un bouton dans le control-panel.
+
+Autre:
+------
+
+- Séparer le code qui fini la page (depuis PHP), le code qui ajoute les callbacks, ...
+- Mettre un "pointer: cursor" dans la liste des sessions sur le control-panel.
+- Mettre un numéro de version dans le control-panel pour suivre l'évolution de l'application.
 - Retirer le "cursor: pointer" quand on passe la souris sur le username du control-panel.
 - Check pourquoi le CSS des cards de session a un bandeau blancs sur certains browsers.
+

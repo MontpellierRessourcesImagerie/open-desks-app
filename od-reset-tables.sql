@@ -4,8 +4,9 @@ USE mri_cia_open_desks;
 
 -- Reset the tables if they already exist.
 DROP TABLE IF EXISTS appointments;
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS engineers;
 
 -- Create the table containing users.
@@ -17,13 +18,18 @@ CREATE TABLE IF NOT EXISTS users (
     team       VARCHAR(100) NOT NULL
 );
 
--- Create the table containing the list of open-desk sessions.
-CREATE TABLE IF NOT EXISTS sessions (
-    session_date     DATE         NOT NULL PRIMARY KEY,
-    session_location VARCHAR(255) NOT NULL,
-    n_engineers      INT          NOT NULL
+CREATE TABLE IF NOT EXISTS locations (
+    location_id   INT AUTO_INCREMENT PRIMARY KEY,
+    location_name VARCHAR(255) NOT NULL UNIQUE
 );
 
+-- Create the table containing the list of open-desk sessions.
+CREATE TABLE IF NOT EXISTS sessions (
+    session_date      DATE NOT NULL PRIMARY KEY,
+    session_location  INT  NOT NULL,
+    n_engineers       INT  NOT NULL,
+    FOREIGN KEY (session_location) REFERENCES locations(location_id)
+);
 
 -- Create the table of appointments.
 CREATE TABLE IF NOT EXISTS appointments (
@@ -46,4 +52,3 @@ CREATE TABLE IF NOT EXISTS engineers (
     accepted      BOOLEAN      NOT NULL DEFAULT FALSE,
     created_at    TIMESTAMP             DEFAULT NULL
 );
-

@@ -24,9 +24,9 @@ function validateDate($dateInput) {
 }
 
 function validateLocation($locationInput) {
-    $locationRegex = "/\(.*\)$/";
-    if (!preg_match($locationRegex, $locationInput)) {
-        return "Location must include a place in parentheses (e.g., 'Room Marcel Doree (CRBM)').";
+    $locationID = intval($locationInput);
+    if ($locationID <= 0) {
+        return "The location ID is invalid.";
     }
     return "";
 }
