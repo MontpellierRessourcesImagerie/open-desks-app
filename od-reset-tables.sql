@@ -3,6 +3,7 @@ CREATE DATABASE IF NOT EXISTS mri_cia_open_desks;
 USE mri_cia_open_desks;
 
 -- Reset the tables if they already exist.
+DROP TABLE IF EXISTS global;
 DROP TABLE IF EXISTS appointments;
 DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS locations;
@@ -51,4 +52,10 @@ CREATE TABLE IF NOT EXISTS engineers (
     active_token  VARCHAR(128)          DEFAULT NULL,
     accepted      BOOLEAN      NOT NULL DEFAULT FALSE,
     created_at    TIMESTAMP             DEFAULT NULL
+);
+
+-- Create the table of global variables.
+CREATE TABLE IF NOT EXISTS global (
+    id INTEGER PRIMARY KEY CHECK (id = 1),
+    message VARCHAR(512)
 );

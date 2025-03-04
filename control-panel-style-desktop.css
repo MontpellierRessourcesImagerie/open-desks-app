@@ -172,7 +172,7 @@ p {
 }
 
 /* General form container */
-#new_session, #locations {
+#new_session, #locations, #announcement {
     max-width: 400px;
     margin: 30px auto;
     padding: 20px;
@@ -182,7 +182,7 @@ p {
 }
 
 /* Form structure */
-#new_session_form, #locations_form {
+#new_session_form, #locations_form, #announcement_form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -217,7 +217,7 @@ p {
 }
 
 /* Submit button */
-#button_new_session, #button_location {
+#button_new_session, #button_location, #button_announcement_update {
     padding: 12px;
     background-color: #007bff;
     color: white;
@@ -229,7 +229,19 @@ p {
     transition: background 0.3s;
 }
 
-#button_new_session:hover, #button_location:hover {
+#button_announcement_remove {
+    padding: 12px;
+    background-color: #e10000;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#button_new_session:hover, #button_location:hover, #button_announcement:hover {
     background-color: #0056b3;
 }
 
@@ -241,7 +253,7 @@ p {
     }
 }
 
-#errorBox, #locationErrorBox {
+#errorBox, #locationErrorBox, #announcementErrorBox {
     border: solid 4px #cd1818;
     background-color: rgb(255, 181, 181);
     border-radius: 4px;

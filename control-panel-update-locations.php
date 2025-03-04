@@ -5,7 +5,7 @@ include("db.php");
 include("connect-ensure.php");
 
 $pdo = connect_db();
-requireAuthentication($pdo, "control-panel-update-locations.php");
+requireAuthentication($pdo, "control-panel.php");
 $success = true;
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {

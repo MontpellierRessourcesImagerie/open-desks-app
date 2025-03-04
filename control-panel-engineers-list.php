@@ -24,7 +24,7 @@ function getUsersList($pdo) {
 }
 
 $pdo = connect_db();
-requireAuthentication($pdo, "control-panel-engineers-list.php");
+requireAuthentication($pdo, "control-panel.php");
 $users = getUsersList($pdo);
 $pdo   = null;
 echo json_encode($users);

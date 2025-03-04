@@ -259,6 +259,23 @@ function unpack_sessions(sessions, appointments) {
     }
 }
 
+function update_announcement(message) {
+    const formData = new FormData();
+    formData.append("message", message);
+
+    fetch("control-panel-update-announcement.php", {
+        method: "POST",
+        body: formData
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        if (result.success) {
+            window.location.reload();
+        }
+    })
+    .catch(error => console.error("Error deleting the session:", error));
+}
+
 function removeSession(session_id) {
     if (confirm("Are you sure you want to delete this session?")) {
         const formData = new FormData();
@@ -510,4 +527,14 @@ document.getElementById("logout").addEventListener("click", function() {
             window.location.href = "control-panel.php";
         }
     }).catch(error => console.error("Logout failed:", error));
+});
+
+document.getElementById("button_announcement_update").addEventListener("click", function() {
+    const message = document.getElementById("announcement_text").value;
+    update_announcement(message);
+});
+
+document.getElementById("button_announcement_remove").addEventListener("click", function() {
+    const message = "";
+    update_announcement(message);
 });

@@ -133,6 +133,20 @@ $pdo = null;
         <div class='nothing'>🔍 No appointment yet.</div>
     </div>
 
+    <h2>Announcement</h2>
+
+    <div id="announcement">
+        <form id="announcement_form" method="POST">
+            <div class="input-group">
+                <label for="announcement_text">Announcement</label>
+                <input type="text" id="announcement_text" name="announcement_text">
+            </div>
+            <button id="button_announcement_update" type="submit">Update</button>
+            <button id="button_announcement_remove" type="submit">Remove</button>
+        </form>
+        <span id="announcementErrorBox"></span>
+    </div>
+
     <h2>Locations</h2>
 
     <div id="locations">

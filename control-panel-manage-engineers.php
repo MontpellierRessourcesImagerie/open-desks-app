@@ -6,7 +6,7 @@ include("db.php");
 include("connect-ensure.php");
 
 $pdo = connect_db();
-requireAuthentication($pdo, "control-panel-manage-engineers.php");
+requireAuthentication($pdo, "control-panel.php");
 
 $success = true;
 

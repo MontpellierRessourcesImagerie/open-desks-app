@@ -4,13 +4,12 @@ TO-DO:
 Important:
 ----------
 
-- Ajouter une table pour les localisations.
+- Écrire la documentation de l'application.
+- Ajouter des commentaires dans le code.
 - Ajouter un système de role (admin et regular).
 - Utiliser la fonction "requiredData" dans tous les PHP, ainsi que le 'isset($_POST)'.
-- Ajouter des commentaires dans le code.
-- Écrire la documentation de l'application.
 - Vérifier le système de fonctionnement de la connexion, et des fins de connexion.
-- Changer les injections PHP direct dans le JS en requêtes AJAX.
+- Nettoyer la façon dont les données sont transférées de PHP à JS.
 - Ajouter la possibilité de pouvoir afficher une annonce dans le bandeau depuis le control-panel.
 - Ne pas pouvoir se supprimer soi-même de la liste des engineers.
 - Masquer le formulaire de booking si la liste d'open-desks est vide.

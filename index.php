@@ -6,11 +6,13 @@
 
     include("db.php");
     include("extract-sessions.php");
+    include("index-announcement.php");
     global $_TIME_START, $_TIME_END, $_RDV_DURATION;
 
     $pdo          = connect_db();
     $sessionData  = get_sessions_map($pdo);
     $appointments = get_appointment_counts($pdo);
+    $announcement = make_announcement($pdo);
     $pdo          = null;
     
     $timeSlots    = json_encode(make_laps($_TIME_START, $_TIME_END, $_RDV_DURATION), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
@@ -47,6 +49,10 @@
         <br>
         <span>by MRI-CIA</span>
     </div>
+
+    <!-- ANNOUNCEMENT -->
+
+    <?php echo $announcement; ?>
 
     <!--  INTRODUCTION  -->
     <div id="introduction">
