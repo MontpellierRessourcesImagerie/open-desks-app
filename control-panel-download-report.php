@@ -1,13 +1,12 @@
 <?php
 
+header('Content-Type: text/csv; charset=utf-8');
+header('Content-Disposition: attachment; filename=sessions_appointments.csv');
 include("db.php");
 include("connect-ensure.php");
 
 $pdo = connect_db();
 requireAuthentication($pdo, "control-panel.php");
-
-header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename=sessions_appointments.csv');
 
 $output = fopen('php://output', 'w');
 

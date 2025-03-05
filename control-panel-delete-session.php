@@ -2,24 +2,25 @@
 
 header("Content-Type: application/json");
 include("db.php");
+include("utils.php");
 include("connect-ensure.php");
+
+if (($_SERVER["REQUEST_METHOD"] !== "POST") || !isset($_POST)) {
+    $success = false;
+    echo json_encode(["success" => $success]);
+    exit;
+}
+
+$fields = ["session_id"];
+if (!requiredData($fields)) {
+    $success = false;
+    echo json_encode(["success" => $success]);
+    exit;
+}
 
 $pdo = connect_db();
 requireAuthentication($pdo, "control-panel.php");
 $success = true;
-
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    $success = false;
-    echo json_encode(["success" => $success]);
-    exit;
-}
-
-if (!isset($_POST["session_id"])) {
-    $success = false;
-    echo json_encode(["success" => $success]);
-    exit;
-}
-
 $session_id = $_POST["session_id"];
 
 try {

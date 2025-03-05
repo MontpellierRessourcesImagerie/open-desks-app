@@ -8,6 +8,14 @@
 
 ---
 
+## Install the application
+
+- Copy all the files except `od-reset-tables.sql` and `to-do.txt` to the server's folder.
+- Update de database's name in `od-reset-tables.sql`.
+- Inject the content of `od-reset-tables.sql` in the database.
+- Update the content of `db-config.php` with the correct database, user and password.
+- Go right away on the "signup.php" page and create an account.
+
 ## Booking
 
 - Anybody (no connection required) can book an appointment for a session from the main page (`index.php`).

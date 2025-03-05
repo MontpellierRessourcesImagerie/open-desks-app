@@ -1,22 +1,25 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 header("Content-Type: application/json");
-
 include("db.php");
 include("connect-ensure.php");
 
-function getUsersList($pdo) {
+/** 
+ * Get the list of engineers from the database.
+ * Includes the username, accepted status and creation date of the last known token.
+ * An empty list is returned in case of error.
+ * 
+ * @param PDO $pdo
+ * @return array Array of engineers.
+ */
+function getEngineersList($pdo) {
     try {
         $query = $pdo->query("
             SELECT username, accepted, created_at 
             FROM engineers
         ");
-        $users = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
+        $engineers = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $engineers;
     } catch (Exception $e) {
         return [];
     }
@@ -25,8 +28,8 @@ function getUsersList($pdo) {
 
 $pdo = connect_db();
 requireAuthentication($pdo, "control-panel.php");
-$users = getUsersList($pdo);
-$pdo   = null;
-echo json_encode($users);
+$engineers = getEngineersList($pdo);
+$pdo = null;
+echo json_encode($engineers);
 
 ?>

@@ -4,15 +4,14 @@ TO-DO:
 Important:
 ----------
 
+- Virer les displays d'erreurs PHP.
 - Écrire la documentation de l'application.
 - Ajouter des commentaires dans le code.
 - Ajouter un système de role (admin et regular).
+- Ajouter un bouton pour éditer la localisation ou le nombre d'ingenieurs d'une session.
 - Utiliser la fonction "requiredData" dans tous les PHP, ainsi que le 'isset($_POST)'.
-- Vérifier le système de fonctionnement de la connexion, et des fins de connexion.
 - Nettoyer la façon dont les données sont transférées de PHP à JS.
-- Ajouter la possibilité de pouvoir afficher une annonce dans le bandeau depuis le control-panel.
 - Ne pas pouvoir se supprimer soi-même de la liste des engineers.
-- Masquer le formulaire de booking si la liste d'open-desks est vide.
 - Pouvoir changer la localisation d'une session depuis un bouton dans le control-panel.
 
 Autre:

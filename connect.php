@@ -4,6 +4,7 @@ include("utils.php");
 $target = isset($_GET['target']) ? htmlspecialchars($_GET['target']) : '.';
 $errorMessage = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : '';
 if (!isSafeFile($target)) { $target = '.'; }
+
 ?>
 
 <head>

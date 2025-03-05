@@ -16,6 +16,11 @@ const _MONTHS_LIST = [
 
 main();
 
+/**
+ * Checks that all the required data is available and then builds the page.
+ * Starts by displaying the sessions list and the appointments, followed by the connected user and the locations.
+ * The run is aborted if any of the required data is missing.
+ */
 function main() {
     if (typeof(sessionData) === "undefined") {
         console.error("No session data found.");
@@ -34,11 +39,17 @@ function main() {
         return;
     }
     unpack_sessions(sessionData, sessionDetails);
-    showUserDetails(userData);
-    fetchUsers();
+    showUsername(userData);
+    fetchEngineers();
     showLocations(locations);
 }
 
+/**
+ * Displays the locations in the select element of the "new session" form.
+ * The displayed name is the location name and the value is the location ID.
+ * 
+ * @param {Object} locs - A map of location ID => Name.
+ */
 function showLocations(locs) {
     let target = document.getElementById("location");
     target.innerHTML = "";
@@ -51,11 +62,23 @@ function showLocations(locs) {
     }
 }
 
-function showUserDetails(usrInfo) {
+/**
+ * Displays the username of the connected engineer in the header.
+ */
+function showUsername(usrInfo) {
     let uname = document.getElementById("user-info");
     uname.textContent = usrInfo['username'];
 }
 
+/**
+ * Creates an HTML block corresponding to an appointment.
+ * These blocks are discarded an recreated every time we click on a session.
+ * A block contains the contact info, affiliation, time, data link and problem description.
+ * This block is created from a map of data.
+ * 
+ * @param {Object} data - A map of appointment data.
+ * @returns {HTMLDivElement} - The created appointment block.
+ */
 function createAppointmentBlock(data) {
     // Create main container
     let appointmentDiv = document.createElement("div");
@@ -150,6 +173,13 @@ function createAppointmentBlock(data) {
     return appointmentDiv;
 }
 
+/**
+ * Clears the displayed list of appointments and then recreates it.
+ * If no appointments are available, a message is displayed.
+ * 
+ * @param {HTMLDivElement} root - The root element where the appointments will be displayed.
+ * @param {Array} details - An array of appointment data.
+ */
 function reset_appointments(root, details) {
     root.innerHTML = "";
     if (details === undefined) {
@@ -161,6 +191,18 @@ function reset_appointments(root, details) {
     }
 }
 
+/**
+ * Creates the content of a new row in the table of sessions.
+ * 
+ * @param {HTMLTableElement} root - The table element where the row will be added.
+ * @param {Number} day - The day of the session, in [1, 31].
+ * @param {Number} month - The month of the session, in [1, 12].
+ * @param {Number} year - The year of the session, on 4 digits.
+ * @param {String} location - The location of the session in plain text.
+ * @param {Number} n_engineers - The number of engineers present for the session.
+ * @param {String} session_id - The ID of the session (== session date in the DB).
+ * @param {Array} appointments - The list of appointments for the session.
+ */
 function addSession(root, day, month, year, location, n_engineers, session_id, appointments) {
     if (!root || !(root instanceof HTMLTableElement)) {
         console.error("Invalid table reference.");
@@ -201,12 +243,27 @@ function addSession(root, day, month, year, location, n_engineers, session_id, a
     deleteCell.appendChild(deleteButton);
 }
 
+/**
+ * Checks whether a date is today or later.
+ * 
+ * @param {Number} day - A day in [1, 31].
+ * @param {Number} month - A month in [1, 12].
+ * @param {Number} year - A year on 4 digits.
+ * @returns {Boolean} - True if the date is today or later, false otherwise.
+ */
 function is_today_or_later(day, month, year) {
     let today = new Date();
     let session_date = new Date(year, month - 1, day);
     return session_date >= today;
 }
 
+/**
+ * Iterates through the list of sessions received from PHP, creates their HTML representation and displays them.
+ * Creates the table containing this list of sessions.
+ * 
+ * @param {Object} sessions - A map of session ID => session data.
+ * @param {Object} appointments - A map of session ID => list of appointments.
+ */
 function unpack_sessions(sessions, appointments) {
     let root = document.getElementById('sessions_list');
     root.innerHTML = "";
@@ -231,8 +288,8 @@ function unpack_sessions(sessions, appointments) {
     `;
     table.appendChild(thead);
 
-    let index = -1;
-    let current = 0;
+    let index = -1; // will contain the index of the first session that is today or later.
+    let current = 0; // to keep track of the current iteration's index.
     for (const [session_id, info] of Object.entries(sessions)) {
         let day   = info['day'];
         let month = info['month'];
@@ -254,11 +311,17 @@ function unpack_sessions(sessions, appointments) {
         current += 1;
     }
     if (index >= 0) {
-        // +1 due to the header
+        // +1 due to the header row
         table.rows[index+1].click();
     }
 }
 
+/**
+ * AJAX request to update the announcement message shown on the main page.
+ * If the message is empty, the announcement is removed.
+ * 
+ * @param {String} message - The new announcement message.
+ */
 function update_announcement(message) {
     const formData = new FormData();
     formData.append("message", message);
@@ -276,6 +339,11 @@ function update_announcement(message) {
     .catch(error => console.error("Error deleting the session:", error));
 }
 
+/**
+ * AJAX request to delete a session.
+ * 
+ * @param {String} session_id - The ID of the session to delete.
+ */
 function removeSession(session_id) {
     if (confirm("Are you sure you want to delete this session?")) {
         const formData = new FormData();
@@ -294,6 +362,13 @@ function removeSession(session_id) {
     }
 }
 
+/**
+ * Validator for the name of a new location.
+ * A location must be in the format "Room Name (Building Name)".
+ * 
+ * @param {String} locationInput - The name of the new location.
+ * @returns {String} - An error message if the location is invalid, an empty string otherwise.
+ */
 function validateNewLocation(locationInput) {
     const locationRegex = /\(.*\)$/;
     if (!locationRegex.test(locationInput)) {
@@ -302,6 +377,13 @@ function validateNewLocation(locationInput) {
     return "";
 }
 
+/**
+ * Validator for the date of a new session.
+ * A session date must be today or later.
+ * 
+ * @param {String} dateInput - The date of the new session.
+ * @returns {String} - An error message if the date is invalid, an empty string otherwise.
+ */
 function validateDate(dateInput) {
     const selectedDate = new Date(dateInput);
     const today = new Date();
@@ -312,14 +394,28 @@ function validateDate(dateInput) {
     return "";
 }
 
+/**
+ * Validator for the location ID of a new session.
+ * A location ID must be a non-null positive integer.
+ * 
+ * @param {String} locationInput - The location ID of the new session.
+ * @returns {String} - An error message if the location ID is invalid, an empty string otherwise.
+ */
 function validateLocation(locationInput) {
     const locationID = parseInt(locationInput, 10);
-    if (isNaN(locationID) || locationID < 0) {
+    if (isNaN(locationID) || locationID <= 0) {
         return "The location ID is invalid";
     }
     return "";
 }
 
+/**
+ * Validator for the number of engineers of a new session.
+ * The number of engineers must be a non-null positive integer.
+ * 
+ * @param {String} engineersInput - The number of engineers of the new session.
+ * @returns {String} - An error message if the number of engineers is invalid, an empty string otherwise.
+ */
 function validateEngineers(engineersInput) {
     const engineersCount = parseInt(engineersInput, 10);
     if (isNaN(engineersCount) || engineersCount < 1) {
@@ -328,6 +424,12 @@ function validateEngineers(engineersInput) {
     return "";
 }
 
+/**
+ * Runs sequentially the validation functions for the "new session" form.
+ * If any of the validation functions returns an error message, the form is not submitted.
+ * 
+ * @returns {String} - An error message if any of the validation functions returns an error, an empty string otherwise.
+ */
 function validateForm() {
     let vd = validateDate(document.getElementById("session_date").value);
     if (vd.length > 0) { return vd; }
@@ -338,6 +440,12 @@ function validateForm() {
     return "";
 }
 
+/**
+ * Activates the error box if the error message is not empty.
+ * This shows the error text in a red box below the form.
+ * 
+ * @param {String} errorMessage - The error message to display.
+ */
 function setError(errorMessage) {
     target = document.getElementById("errorBox");
     isError = errorMessage.length > 0;
@@ -349,6 +457,9 @@ function setError(errorMessage) {
     }
 }
 
+/**
+ * Same as 'setError', but for the location error box.
+ */
 function setErrorLocation(errorMessage) {
     target = document.getElementById("locationErrorBox");
     isError = errorMessage.length > 0;
@@ -360,7 +471,11 @@ function setErrorLocation(errorMessage) {
     }
 }
 
-function fetchUsers() {
+/**
+ * AJAX request fetching the list of engineers from the database and displays them in a table.
+ * Each row contains the username, the creation date, a "revoke" button and a "delete" button.
+ */
+function fetchEngineers() {
     fetch("control-panel-engineers-list.php")
         .then(response => response.json())
         .then(users => {
@@ -402,7 +517,7 @@ function fetchUsers() {
                 actionButton.classList.add(user.accepted ? "btn-revoke" : "btn-accept");
 
                 actionButton.addEventListener("click", function() {
-                    toggleUser(user.username, !user.accepted);
+                    toggleEngineer(user.username, !user.accepted);
                 });
 
                 actionCell.appendChild(actionButton);
@@ -432,6 +547,11 @@ function fetchUsers() {
         .catch(error => console.error("Error fetching users:", error));
 }
 
+/**
+ * AJAX request to delete an engineer from the database.
+ * 
+ * @param {String} username - The username of the engineer to delete.
+ */
 function deleteUser(username) {
     if (confirm(`Are you sure you want to delete ${username}?`)) {
         const formData = new FormData();
@@ -450,7 +570,15 @@ function deleteUser(username) {
     }
 }
 
-function toggleUser(username, newStatus) {
+/**
+ * AJAX request to toggle the status of an engineer.
+ * Makes an engineer 'accepted' or 'revoked'.
+ * The username is the primary key of the 'engineers' table.
+ * 
+ * @param {String} username - The username of the engineer to update.
+ * @param {Boolean} newStatus - The new status of the engineer.
+ */
+function toggleEngineer(username, newStatus) {
     const formData = new FormData();
     formData.append("username", username);
     formData.append("accepted", newStatus ? "true" : "false");
@@ -467,6 +595,13 @@ function toggleUser(username, newStatus) {
       .catch(error => console.error("Error updating user status:", error));
 }
 
+
+/**
+ * AJAX request to add a new location to the database.
+ * The location name must be in the format "Room Name (Building Name)".
+ * 
+ * @param {String} locationName - The name of the new location.
+ */
 function addNewLocation(locationName) {
     const formData = new FormData();
     formData.append("location_name", locationName);
@@ -483,6 +618,7 @@ function addNewLocation(locationName) {
 }
 
 document.getElementById("button_location").addEventListener("click", function (event) {
+    event.preventDefault();
     const value = document.getElementById("new_location").value;
     errorMessage = validateNewLocation(value);
     setErrorLocation(errorMessage);
@@ -523,6 +659,7 @@ document.getElementById("logout").addEventListener("click", function() {
         method: "POST",
         credentials: "same-origin"
     }).then(response => {
+        console.log("Logout response:", response);
         if (response.ok) {
             window.location.href = "control-panel.php";
         }

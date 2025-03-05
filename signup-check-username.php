@@ -1,19 +1,22 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 include("db.php");
+include("utils.php");
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+if (($_SERVER["REQUEST_METHOD"] !== "POST") || !isset($_POST)) {
+    header("Location: .");
     exit;
 }
 
-$username = trim($_POST['username']);
+$fields = ["username"];
+if (!requiredData($fields)) {
+    echo json_encode(["status" => "error", "message" => "Username not provided"]);
+    exit;
+}
 
 if (empty($username)) {
     echo json_encode(["status" => "error", "message" => "Username cannot be empty"]);
-    exit();
+    exit;
 }
 
 $pdo = connect_db();

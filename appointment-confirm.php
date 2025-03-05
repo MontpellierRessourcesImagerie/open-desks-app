@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include("db.php");
 include("appointment-utils.php");
 
@@ -13,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST)) {
     exit; 
 }
 
+// List of fields that must be received through the POST request.
 $fields = [
     'first_name', 
     'last_name', 
@@ -32,9 +29,9 @@ $pdo     = connect_db();
 $success = addUserAndAppointment($pdo);
 $infos   = getInfos($pdo);
 
-$splitted = explode(";", $infos);
+$splitted = explode(";", $infos); // "date;time;place;sessionID"
 $date = "<div id='date_block'>" . "<span id='date'>🗓️ &nbsp;" . $splitted[0] . "</span><br>" . "<span id='time'>🕒 &nbsp;" . $splitted[1] . "</span><br>" . "<span id='place'>📍 &nbsp;" . $splitted[2] . "</span>" . "</div>";
-$notFromCampus = isset($_POST['notFromCampus']);
+$notFromCampus = isset($_POST['notFromCampus']); // a checkbox is set only if checked in the form.
 
 $pdo = null;
 unset($_POST);

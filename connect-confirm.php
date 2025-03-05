@@ -1,21 +1,25 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 include("db.php");
 include("utils.php");
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+if (($_SERVER["REQUEST_METHOD"] !== "POST") || !isset($_POST)) {
     header("Location: .");
     exit;
 }
 
+$fields = [
+    'username', 
+    'password'
+];
+
+if (!requiredData($fields)) { exit; }
+
 $pdo = connect_db();
 $username = $_POST['username'];
 $password = $_POST['password'];
-$target   = $_POST['target'] ?? '..';
-if (!isSafeFile($target)) { $target = ".."; }
+$target   = $_POST['target'] ?? '.';
+if (!isSafeFile($target)) { $target = "."; }
 
 $stmt = $pdo->prepare("SELECT username, password_hash, accepted FROM engineers WHERE username = :username");
 $stmt->execute([':username' => $username]);
@@ -37,6 +41,7 @@ if ((int)$user['accepted'] !== 1) {
     exit;
 }
 
+// Generate a new active connection token + store it in the DB.
 $activeToken = bin2hex(random_bytes(32));
 
 $updateStmt = $pdo->prepare("
@@ -51,8 +56,10 @@ $updateStmt->execute([
     ':username' => $username
 ]);
 
-
 setcookie("active_token", $activeToken, time() + 86400, "/", "", true, true);
+$pdo = null;
+unset($_POST);
+
 header("Location: " . htmlspecialchars($target));
 exit;
 

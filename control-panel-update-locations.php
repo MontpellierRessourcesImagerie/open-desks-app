@@ -2,37 +2,36 @@
 
 header("Content-Type: application/json");
 include("db.php");
+include("utils.php");
 include("connect-ensure.php");
+
+if (($_SERVER["REQUEST_METHOD"] !== "POST") || !isset($_POST)) {
+    $success = false;
+    echo json_encode(["success" => $success]);
+    exit;
+}
+
+$fields = ["location_name"];
+if (!requiredData($fields)) {
+    $success = false;
+    echo json_encode(["success" => $success]);
+    exit;
+}
 
 $pdo = connect_db();
 requireAuthentication($pdo, "control-panel.php");
 $success = true;
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    $success = false;
-    echo json_encode(["success" => $success]);
-    exit;
-}
-
-if (!isset($_POST["location_name"])) {
-    $success = false;
-    echo json_encode(["success" => $success]);
-    exit;
-}
-
 function validateNewLocation($locationInput) {
     $locationRegex = '/\(.*\)$/';
-
     if (!preg_match($locationRegex, $locationInput)) {
         return "Location must include a place in parentheses (e.g., 'Room Marcel Doree (CRBM)').";
     }
-
     return "";
 }
 
 $location_name = $_POST["location_name"];
 $error = validateNewLocation($location_name);
-
 if ($error !== "") {
     $success = false;
     echo json_encode(["success" => $success, "error" => $error]);
@@ -49,6 +48,7 @@ try {
 }
 
 $pdo = null;
+unset($_POST);
 echo json_encode(["success" => $success]);
 exit;
 ?>

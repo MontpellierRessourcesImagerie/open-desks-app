@@ -1,16 +1,16 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include("db.php");
 include("extract-sessions.php");
 include("connect-ensure.php");
 
 /**
- * Fetches the appointments from the database.
- * Returns a dictionary with the session id as key and the appointments as value.
+ * Fetches the appointments for each session from the database.
+ * The produced structure is a map, with the key being the session ID and the value being an array of appointments.
+ * A jointure was made to display the user's information instead of its ID.
+ * 
+ * @param PDO $pdo The database connection.
+ * @return array The map of sessions and their appointments.
  */
 function get_detailed_appointments($pdo) {
     $sql = "SELECT 
@@ -36,26 +36,33 @@ function get_detailed_appointments($pdo) {
     foreach ($appointments as $appointment) {
         $session_id = $appointment['session_id'];
 
-        if (!isset($result[$session_id])) {
+        if (!isset($result[$session_id])) { // The key doesn't exist in the map
             $result[$session_id] = [];
         }
 
         $result[$session_id][] = [
-            'first_name'         => $appointment['first_name'],
-            'last_name'          => $appointment['last_name'],
-            'institute'          => $appointment['institute'],
-            'team'               => $appointment['team'],
-            'email'              => $appointment['email'],
-            'problem_description'=> $appointment['problem_description'],
-            'time_start'         => $appointment['time_start'],
-            'images_link'        => $appointment['images_link'],
-            'total_appointments' => $appointment['total_appointments']
+            'first_name'          => $appointment['first_name'],
+            'last_name'           => $appointment['last_name'],
+            'institute'           => $appointment['institute'],
+            'team'                => $appointment['team'],
+            'email'               => $appointment['email'],
+            'problem_description' => $appointment['problem_description'],
+            'time_start'          => $appointment['time_start'],
+            'images_link'         => $appointment['images_link'],
+            'total_appointments'  => $appointment['total_appointments']
         ];
     }
 
     return $result;
 }
 
+/**
+ * Fetches all the possible locations from the database.
+ * They are used in the "new session" form.
+ * 
+ * @param PDO $pdo The database connection.
+ * @return array The map of locations.
+ */
 function get_locations(PDO $pdo) {
     $sql = "SELECT location_id, location_name FROM locations";
     $stmt = $pdo->prepare($sql);
@@ -71,23 +78,12 @@ function get_locations(PDO $pdo) {
 
 $pdo = connect_db();
 
-// Ensures that the user is connected.
 requireAuthentication($pdo, "control-panel.php");
 
 $sessionData    = json_encode(get_sessions_map($pdo, true));
 $sessionDetails = json_encode(get_detailed_appointments($pdo));
 $userData       = json_encode(getAuthenticatedUser($pdo));
 $locations      = json_encode(get_locations($pdo));
-
-/**
- * Used to prevent the user to create a session in the past.
- */
-function isDateAnterior($day, $month, $year) {
-    $givenDate = new DateTime("$year-$month-$day");
-    $today = new DateTime();
-    return $givenDate <= $today;
-}
-
 
 $pdo = null;
 

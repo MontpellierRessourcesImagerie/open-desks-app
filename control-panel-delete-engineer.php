@@ -2,6 +2,7 @@
 
 header("Content-Type: application/json");
 include("db.php");
+include("utils.php");
 include("connect-ensure.php");
 
 $pdo = connect_db();
@@ -9,13 +10,14 @@ requireAuthentication($pdo, "control-panel.php");
 
 $success = true;
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+if (($_SERVER["REQUEST_METHOD"] !== "POST") || !isset($_POST)) {
     $success = false;
     echo json_encode(["success" => $success]);
     exit;
 }
 
-if (!isset($_POST["username"])) {
+$fields = ["username"];
+if (!requiredData($fields)) {
     $success = false;
     echo json_encode(["success" => $success]);
     exit;
