@@ -183,7 +183,7 @@ function createAppointmentBlock(data) {
 function reset_appointments(root, details) {
     root.innerHTML = "";
     if (details === undefined) {
-        root.innerHTML = "<div class='nothing'>🔍 Nothing appointments for this session!</div>";
+        root.innerHTML = "<div class='nothing'>🔍 No appointments for this session!</div>";
     } else {
         details.forEach(data => {
             root.appendChild(createAppointmentBlock(data));
