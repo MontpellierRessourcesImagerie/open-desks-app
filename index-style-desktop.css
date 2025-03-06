@@ -66,6 +66,7 @@ html, body {
     border: solid 3px #ff9800;
     border-left: 10px solid #ff9800;
     border-radius: 10px;
+    font-family: "Yaldevi";
 }
 
 #announcement>span::before {
