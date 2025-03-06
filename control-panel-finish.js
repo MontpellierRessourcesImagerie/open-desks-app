@@ -253,7 +253,7 @@ function addSession(root, day, month, year, location, n_engineers, session_id, a
  */
 function is_today_or_later(day, month, year) {
     let today = new Date();
-    let session_date = new Date(year, month - 1, day);
+    let session_date = new Date(year, month - 1, day, 23, 59, 59);
     return session_date >= today;
 }
 
