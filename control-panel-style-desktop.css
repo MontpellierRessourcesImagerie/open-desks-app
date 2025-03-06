@@ -6,6 +6,7 @@ html, body {
     margin: 0;
     padding: 0;
     padding-bottom: 20px;
+    font-family: "Yaldevi";
 }
 
 #title {
@@ -39,6 +40,7 @@ h2 {
     transform: translateX(-50%);
     border-radius: 100px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+    font-family: "Lilita One";
 }
 
 #nb_buttons a {
@@ -169,6 +171,7 @@ p {
     color: #777;
     text-align: center;
     margin-top: 20px;
+    font-family: "Lilita One";
 }
 
 /* General form container */
