@@ -56,7 +56,7 @@
             <li class="intro_line">Open-desk sessions are <b>one-to-one meetings</b> where you can get help with your <b>image analysis problems</b>.</li>
             <li class="intro_line">Registration is <b>completely free</b>, and there is <b>no charge</b> for any work undertaken <b>during the session</b>.</li>
             <li class="intro_line">We can handle <b>any imaging modality</b><span> (e.g. fluo, IHC, µ-CT, FLIM/FRET, FRAP, ...)</span>.</li>
-            <li class="intro_line">You can bring <b>any king of issue</b><span> (e.g. deconvolution, stitching, colocalization, tracking, cells segmentation, ...)</span>.</li>
+            <li class="intro_line">You can come for <b>any kind of issue</b><span> (e.g. deconvolution, stitching, colocalization, tracking, cells segmentation, ...)</span>.</li>
             <li class="intro_line">We can help you get your <b>hands on analysis softwares</b><span> (e.g. ImageJ/Fiji, QuPath, Huygens, Imaris, CellPose, ...)</span>.</li>
         </ul>
     </div>

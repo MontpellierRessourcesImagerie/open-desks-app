@@ -4,22 +4,19 @@ TO-DO:
 Important:
 ----------
 
-- Virer les displays d'erreurs PHP.
-- Écrire la documentation de l'application.
-- Ajouter des commentaires dans le code.
 - Ajouter un système de role (admin et regular).
 - Ajouter un bouton pour éditer la localisation ou le nombre d'ingenieurs d'une session.
-- Utiliser la fonction "requiredData" dans tous les PHP, ainsi que le 'isset($_POST)'.
 - Nettoyer la façon dont les données sont transférées de PHP à JS.
 - Ne pas pouvoir se supprimer soi-même de la liste des engineers.
-- Pouvoir changer la localisation d'une session depuis un bouton dans le control-panel.
+- Ajouter des checkboxes:
+	- "I need help with images analysis" (pas décochable)
+	- "I would like a microscopist to be present"
+	- "I would like a statistician to be present"
 
 Autre:
 ------
 
 - Séparer le code qui fini la page (depuis PHP), le code qui ajoute les callbacks, ...
-- Mettre un "pointer: cursor" dans la liste des sessions sur le control-panel.
 - Mettre un numéro de version dans le control-panel pour suivre l'évolution de l'application.
 - Retirer le "cursor: pointer" quand on passe la souris sur le username du control-panel.
 - Check pourquoi le CSS des cards de session a un bandeau blancs sur certains browsers.
-
