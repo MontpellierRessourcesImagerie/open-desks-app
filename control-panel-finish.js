@@ -70,6 +70,25 @@ function showUsername(usrInfo) {
     uname.textContent = usrInfo['username'];
 }
 
+function copyDataToClipboard(data) {
+    let text = data['first_name'] + " " + data['last_name'] + " - ";
+    text += data['institute'] + " - \n";
+
+    text += "Institute:" + data['institute'] + "\n";
+    text += "Team:" + data['team'] + "\n";
+    text += "Contact: " + data['email'] + "\n\n";
+    text += "Problem description: " + data['problem_description'] + "\n\n";
+    text += "=======================\n\n";
+
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            console.log("Data copied to clipboard.");
+        })
+        .catch(err => {
+            console.error("Failed to copy data: ", err);
+        });
+}
+
 /**
  * Creates an HTML block corresponding to an appointment.
  * These blocks are discarded an recreated every time we click on a session.
@@ -121,6 +140,9 @@ function createAppointmentBlock(data, session_id) {
             let msgComeSpan = document.createElement("span");
             msgComeSpan.textContent = "Was present!";
             confirmSection.append(checkMarkImg, msgComeSpan);
+            confirmSection.addEventListener("click", function() {
+                copyDataToClipboard(data);
+            });
         }
         else {
             let confirmComeButton = document.createElement("button");

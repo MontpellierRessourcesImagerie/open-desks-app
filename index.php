@@ -117,10 +117,10 @@
                     id="question" 
                     src="./data/medias/question-line.svg" 
                     style="width: 15px; height: 15px; vertical-align: super; margin-left: 1px; cursor: pointer;" 
-                    title="When you use FileZilla to transfer your data on 'Sftp MRI', they are on 'sftp://utah.mri.cnrs.fr'. Place them in _COMMUN for us to access them. Click here for more details about FileZilla."
+                    title="When you use FileZilla to transfer your data on 'Sftp MRI', they are on 'sftp://utah.mri.cnrs.fr'. Place them in _COMMON for us to access them. Click on the question mark for more details about FileZilla."
                 ></a>
             </label><br>
-            <input type="text" id="dataLink" name="dataLink" placeholder="ex: sftp://utah.mri.cnrs.fr/_COMMUN/myname/my-images"><br>
+            <input type="text" id="dataLink" name="dataLink" placeholder="ex: sftp://utah.mri.cnrs.fr/_COMMON/myname/my-images"><br>
             
             <input type="checkbox" id="noData" name="noData">
             <label for="noData">I will come with a USB drive</label><br>

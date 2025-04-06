@@ -105,6 +105,8 @@ h2 {
     background-color: #d1d1d1;
     text-decoration: line-through;
     filter: brightness(120%) saturate(50%);
+    box-shadow: none;
+    border: solid 1px rgb(189, 189, 189);
 }
 
 .canceled>.problem {
@@ -166,6 +168,13 @@ p {
 
 .confirm_section {
     float: right;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.confirm_section:hover {
+    opacity: 1.0;
 }
 
 .confirm_section>button {
