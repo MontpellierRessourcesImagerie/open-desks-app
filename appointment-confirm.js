@@ -91,12 +91,13 @@ function addLinkToClipboard(link) {
 
 function getRootURL() {
     const loc = window.location;
-    const pathParts = loc.pathname.split('/').filter(p => p); // enlève les vides
-
-    // Récupère le premier sous-dossier s'il y en a un
-    const baseFolder = pathParts.length > 0 ? '/' + pathParts[0] : '';
-
-    return loc.protocol + '//' + loc.host + baseFolder;
+    const pathParts = loc.pathname.split('/').filter(p => p);
+    let root_folder = "";
+    for (let i = 0; i < pathParts.length - 1; i++) {
+        if (pathParts[i].includes('.')) { break; }
+        root_folder += "/" + pathParts[i];
+    }
+    return loc.protocol + '//' + loc.host + root_folder;
 }
 
 

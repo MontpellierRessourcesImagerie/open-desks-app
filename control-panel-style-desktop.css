@@ -39,8 +39,9 @@ h2 {
     margin-left: 50%;
     transform: translateX(-50%);
     border-radius: 100px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
-    font-family: "Lilita One";
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    font-family: "Yaldevi";
+    font-weight: bold;
 }
 
 #nb_buttons a {
@@ -103,8 +104,8 @@ h2 {
     opacity: 0.5;
     font-style: italic;
     background-color: #d1d1d1;
-    text-decoration: line-through;
-    filter: brightness(120%) saturate(50%);
+    /* text-decoration: line-through; */
+    filter: brightness(115%) saturate(50%) blur(2px);
     box-shadow: none;
     border: solid 1px rgb(189, 189, 189);
 }
