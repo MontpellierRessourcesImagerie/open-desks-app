@@ -1,0 +1,64 @@
+body {
+    font-family: "Yaldevi", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-size: 1.3em;
+}
+
+#cancel-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-details {
+    padding: 15px;
+    background-color: #e7f3ec;
+    color: #2c5d45;
+    border-left: 6px solid #4cae4c;
+    margin-bottom: 20px;
+}
+
+.appointment-details h2 {
+    margin-top: 0;
+    color: #2c5d45;
+}
+
+.info {
+    padding: 15px;
+    background-color: #d8e5f0;
+    color: #3c5f76;
+    border-left: 6px solid #4c8aae;
+    margin-bottom: 20px;
+}
+
+.error {
+    padding: 15px;
+    background-color: #f0d8d8;
+    color: #763c3c;
+    border-left: 6px solid #ae4c4c;
+    margin-bottom: 20px;
+}
+
+#cancel-form {
+    margin-top: 20px;
+}
+
+#cancel-button {
+    background-color: #ffffff;
+    border: 2px solid #ae4c4c;
+    color: #ae4c4c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#cancel-button:hover {
+    background-color: #ae4c4c;
+    color: #ffffff;
+}

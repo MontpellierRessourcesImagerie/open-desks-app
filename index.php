@@ -112,8 +112,15 @@
             <label for="reason">How can we help you?</label>
             <textarea id="reason" name="reason" rows="12" cols="50" placeholder="Max 8192 characters."></textarea><br>
 
-            <label id="lbl_data_link" for="dataLink">Attach a <a href="https://filesender.renater.fr/">FileSender</a> link or an SFTP path:</label><br>
-            <input type="text" id="dataLink" name="dataLink"><br>
+            <label id="lbl_data_link" for="dataLink">Attach a <a href="https://filesender.renater.fr/">FileSender</a> link or an SFTP path:
+                <a href="https://www.mri.cnrs.fr/images/documents/sFTP.pdf"><img 
+                    id="question" 
+                    src="./data/medias/question-line.svg" 
+                    style="width: 15px; height: 15px; vertical-align: super; margin-left: 1px; cursor: pointer;" 
+                    title="When you use FileZilla to transfer your data on 'Sftp MRI', they are on 'sftp://utah.mri.cnrs.fr'. Place them in _COMMUN for us to access them. Click here for more details about FileZilla."
+                ></a>
+            </label><br>
+            <input type="text" id="dataLink" name="dataLink" placeholder="ex: sftp://utah.mri.cnrs.fr/_COMMUN/myname/my-images"><br>
             
             <input type="checkbox" id="noData" name="noData">
             <label for="noData">I will come with a USB drive</label><br>

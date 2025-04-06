@@ -98,6 +98,19 @@ h2 {
     width: 80%;
 }
 
+.canceled {
+    /* Desaturate the block and write everything in italic */
+    opacity: 0.5;
+    font-style: italic;
+    background-color: #d1d1d1;
+    text-decoration: line-through;
+    filter: brightness(120%) saturate(50%);
+}
+
+.canceled>.problem {
+    display: none;
+}
+
 p {
     margin: 8px 0;
     font-size: 16px;
@@ -149,6 +162,29 @@ p {
 .data_link {
     color: green;
     text-decoration: none;
+}
+
+.confirm_section {
+    float: right;
+}
+
+.confirm_section>button {
+    background-color: #fefefe;
+    color: black;
+    border: solid 1px #aaaaaa;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.confirm_section>button:hover {
+    background-color: #c7ffae;
+}
+
+.confirm_section>span {
+    color: #91d622;
 }
 
 .problem {
@@ -288,6 +324,10 @@ p {
     border-radius: 80px;
     position: absolute;
     background-color: white;
+}
+
+#user-info {
+    cursor: auto;
 }
 
 #navbar #user-info {

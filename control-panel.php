@@ -18,7 +18,9 @@ function get_detailed_appointments($pdo) {
                 a.session_id, 
                 a.problem_description, 
                 a.time_start, 
-                a.images_link, 
+                a.images_link,
+                a.has_come,
+                a.canceled,
                 u.first_name, 
                 u.last_name, 
                 u.institute, 
@@ -49,7 +51,9 @@ function get_detailed_appointments($pdo) {
             'problem_description' => $appointment['problem_description'],
             'time_start'          => $appointment['time_start'],
             'images_link'         => $appointment['images_link'],
-            'total_appointments'  => $appointment['total_appointments']
+            'total_appointments'  => $appointment['total_appointments'],
+            'has_come'            => $appointment['has_come'],
+            'canceled'            => $appointment['canceled']
         ];
     }
 

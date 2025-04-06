@@ -25,9 +25,10 @@ $fields = [
 if (!requiredData($fields)) { exit; }
 if (!checkValidity())       { exit; }
 
-$pdo     = connect_db();
-$success = addUserAndAppointment($pdo);
-$infos   = getInfos($pdo);
+$pdo = connect_db();
+$cancel_id = generateSafeAsciiString(12);
+$success = addUserAndAppointment($pdo, $cancel_id);
+$infos = getInfos($pdo);
 
 $splitted = explode(";", $infos); // "date;time;place;sessionID"
 $date = "<div id='date_block'>" . "<span id='date'>🗓️ &nbsp;" . $splitted[0] . "</span><br>" . "<span id='time'>🕒 &nbsp;" . $splitted[1] . "</span><br>" . "<span id='place'>📍 &nbsp;" . $splitted[2] . "</span>" . "</div>";
@@ -56,7 +57,8 @@ unset($_POST);
     <div id="info_box" class="error">
         It looks like you reached that page in an unexpected way...
     </div>
-
+    <div id="cancel">
+    </div>
     <div id="qr_box">
         <strong>⚠️ Important:</strong> You indicated that you are not from the "Route de Mende" campus. To be allowed to enter the campus, you will need to request a QR-code:
         <br>
@@ -72,11 +74,14 @@ unset($_POST);
         <button onclick="window.location.href='.'" id="home_btn" class="btn">🏠 Home</button>
     </div>
 
+    <div id="toast" class="toast"></div>
+
     <script text="text/javascript">
         const success = '<?php echo $success; ?>';
         const msg     = "<?php echo $date; ?>";
         const qr_code = '<?php echo $notFromCampus; ?>';
         const data    = "<?php echo $infos; ?>";
+        const cancel_id = '<?php echo $cancel_id; ?>';
     </script>
     <script type="text/javascript" src="appointment-confirm.js"></script>
 </div>

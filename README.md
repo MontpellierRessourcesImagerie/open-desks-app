@@ -43,3 +43,14 @@
 
 - The tables are available in the `od-reset-tables.sql` file.
 - An exemple of data-base configuration file is present in `db-config.php`.
+
+## Update
+
+- Copy the files except `db-config.php`, `od-reset-tables.sql` and `to-do.txt`.
+- Launch the SQL commands: 
+```sql
+ALTER TABLE appointments ADD COLUMN has_come BOOLEAN NOT NULL DEFAULT FALSE;
+UPDATE appointments SET has_come = TRUE;
+ALTER TABLE appointments ADD COLUMN cancel_id VARCHAR(12) NOT NULL;
+ALTER TABLE appointments ADD COLUMN canceled BOOLEAN NOT NULL DEFAULT FALSE;
+```

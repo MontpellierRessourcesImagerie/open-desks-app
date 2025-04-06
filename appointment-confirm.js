@@ -6,6 +6,8 @@
 const info_box = document.getElementById('info_box');
 /// Block containing the warning prompt to generate an access QR-code.
 const qr_box   = document.getElementById('qr_box');
+/// Block containing the cancelation link.
+const cancel_box = document.getElementById('cancel');
 
 /**
  * This function generates an ICS file for the appointment.
@@ -66,13 +68,54 @@ function makeError() {
     info_box.innerHTML   = "An internal error happened. You should send an email to: <br> 📧 mri-cia@mri.cnrs.fr";
 }
 
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500); // 1.5 seconds
+}
+
+function addLinkToClipboard(link) {
+    navigator.clipboard.writeText(link)
+        .then(() => {
+            console.log("The link was copied to the clipboard.");
+            showToast("Link copied!");
+        })
+        .catch(err => {
+            console.error("Failed to copy the link: ", err);
+        });
+}
+
+function getRootURL() {
+    const loc = window.location;
+    const pathParts = loc.pathname.split('/').filter(p => p); // enlève les vides
+
+    // Récupère le premier sous-dossier s'il y en a un
+    const baseFolder = pathParts.length > 0 ? '/' + pathParts[0] : '';
+
+    return loc.protocol + '//' + loc.host + baseFolder;
+}
+
+
 /**
  * Called to build a confirmation page, if the appointment was successfully booked.
  */
 function makeConfirm() {
-    info_box.className   = "confirm";
+    info_box.className = "confirm";
     qr_box.style.display = parseInt(qr_code) > 0 ? "none" : "block";
-    info_box.innerHTML   = "We are pleased to confirm that you successfully booked to the open-desk session on the: " + msg ;
+    let cancel_url = getRootURL() + "/cancel.php?id=" + cancel_id;
+    let full_text = "We are pleased to confirm that you successfully booked to the open-desk session on the: ";
+    full_text += msg;
+    let cancel_text = "<b>🚫 Need to cancel?</b> <br> <span>" 
+    cancel_text += "<a href='" + cancel_url + "'>" + cancel_url + "</a>"
+    cancel_text += "<button title='Copy link to clipboard' onclick='addLinkToClipboard(" + "\"" + cancel_url + "\"" + ")'><img src='./data/medias/file-copy-fill.svg'></button>";
+    cancel_text += "</span>";
+    cancel_box.innerHTML = cancel_text;
+    cancel_box.style.display = "block";
+    info_box.innerHTML = full_text;
     generateICS();
 }
 

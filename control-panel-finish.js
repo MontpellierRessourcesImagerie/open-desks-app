@@ -79,7 +79,7 @@ function showUsername(usrInfo) {
  * @param {Object} data - A map of appointment data.
  * @returns {HTMLDivElement} - The created appointment block.
  */
-function createAppointmentBlock(data) {
+function createAppointmentBlock(data, session_id) {
     // Create main container
     let appointmentDiv = document.createElement("div");
     appointmentDiv.classList.add("appointment");
@@ -109,7 +109,44 @@ function createAppointmentBlock(data) {
     visitsSpan.innerHTML = data['total_appointments'] > 1 ? `(x${data['total_appointments']})` : `(🌟)`;
 
     emailLink.appendChild(emailSpan);
-    contactP.append(contactLabel, nameSpan, " ", emailLink, " ", visitsSpan);
+
+    let confirmSection = document.createElement("span");
+    confirmSection.classList.add("confirm_section");
+
+    if (!data['canceled']) {
+        if (data['has_come']) {
+            let checkMarkImg = document.createElement("img");
+            checkMarkImg.src = "./data/medias/checkbox-circle-line.svg";
+            checkMarkImg.alt = "Confirmed";
+            let msgComeSpan = document.createElement("span");
+            msgComeSpan.textContent = "Was present!";
+            confirmSection.append(checkMarkImg, msgComeSpan);
+        }
+        else {
+            let confirmComeButton = document.createElement("button");
+            confirmComeButton.textContent = "Confirm presence";
+            confirmComeButton.onclick = function () {
+                const formData = new FormData();
+                formData.append("session_id", session_id);
+                formData.append("email", data['email']);
+                fetch("control-panel-confirm-come.php", {
+                    method: "POST",
+                    body: formData
+                }).then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        window.location.reload();
+                    }
+                })
+                .catch(error => console.error("Error confirming the appointment:", error));
+            };
+            confirmSection.appendChild(confirmComeButton);
+        }
+    }
+    else {
+        appointmentDiv.classList.add("canceled");
+    }
+    contactP.append(contactLabel, nameSpan, " ", emailLink, " ", visitsSpan, confirmSection);
 
     // Affiliation info
     let instituteP = document.createElement("p");
@@ -180,13 +217,13 @@ function createAppointmentBlock(data) {
  * @param {HTMLDivElement} root - The root element where the appointments will be displayed.
  * @param {Array} details - An array of appointment data.
  */
-function reset_appointments(root, details) {
+function reset_appointments(root, details, session_id) {
     root.innerHTML = "";
     if (details === undefined) {
         root.innerHTML = "<div class='nothing'>🔍 No appointments for this session!</div>";
     } else {
         details.forEach(data => {
-            root.appendChild(createAppointmentBlock(data));
+            root.appendChild(createAppointmentBlock(data, session_id));
         });
     }
 }
@@ -220,7 +257,7 @@ function addSession(root, day, month, year, location, n_engineers, session_id, a
         }
         this.style.backgroundColor = "rgba(0, 255, 0, 0.2)";
         this.style.fontWeight = "bold";
-        reset_appointments(details, appointments);
+        reset_appointments(details, appointments, session_id);
     });
 
     let dateCell = row.insertCell(0);

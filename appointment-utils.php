@@ -121,10 +121,10 @@ function addUser($pdo) {
  * Adds an appointment if the user didn't already book one for the same session.
  * @return int 1 if the appointment was added, 0 otherwise.
  */
-function addAppointment($pdo) {
+function addAppointment($pdo, $cancel_id) {
     $meetingSql = "INSERT IGNORE INTO appointments 
-                (user_id, session_id, problem_description, time_start, images_link) 
-                VALUES (:user_id, :session_id, :problem_description, :time_start, :images_link)";
+                (user_id, session_id, problem_description, time_start, images_link, cancel_id) 
+                VALUES (:user_id, :session_id, :problem_description, :time_start, :images_link, :cancel_id)";
 
     $link = isset($_POST['dataLink']) ? $_POST['dataLink'] : "";
     $stmt = $pdo->prepare($meetingSql);
@@ -133,7 +133,8 @@ function addAppointment($pdo) {
         ':session_id'          => $_POST['sessionID'],
         ':time_start'          => $_POST['appointmentTime'],
         ':problem_description' => $_POST['reason'],
-        ':images_link'         => $link
+        ':images_link'         => $link,
+        ':cancel_id'           => $cancel_id
     ]);
 
     return $stmt->rowCount();
@@ -145,10 +146,10 @@ function addAppointment($pdo) {
  *             0 if the user already booked for this session,
  *             -1 if an error occurred.
  */
-function addUserAndAppointment($pdo) {
+function addUserAndAppointment($pdo, $cancel_id) {
     try {
         addUser($pdo);
-        return addAppointment($pdo);
+        return addAppointment($pdo, $cancel_id);
     } catch (Exception $e) {
         echo $e->getMessage();
         error_log("Error while inserting user and appointment: " . $e->getMessage());

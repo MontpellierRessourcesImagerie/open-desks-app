@@ -76,7 +76,6 @@ function makeLitteralDate($dateString) {
  */
 function requiredData($fields) {
     if ($fields === null) {
-        echo "Undefined fields to check.";
         return false;
     }
     $missingFields = [];
@@ -88,7 +87,6 @@ function requiredData($fields) {
     }
 
     if (!empty($missingFields)) {
-        echo "Some required fields are missing: " . implode(', ', $missingFields);
         return false;
     }
     
@@ -110,6 +108,32 @@ function isSafeFile($target) {
     $r_path = realpath($target);
     $s_path = realpath(".");
     return str_starts_with($r_path, $s_path);
+}
+
+function getSafeCharsList() {
+    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+}
+
+function generateSafeAsciiString($length) {
+    $allowedChars = getSafeCharsList();
+    $result = '';
+    $maxIndex = strlen($allowedChars) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $index = random_int(0, $maxIndex);
+        $result .= $allowedChars[$index];
+    }
+    return $result;
+}
+
+function isSafeCharChain($inputChain) {
+    $allowedChars = getSafeCharsList();
+    for ($i = 0; $i < strlen($inputChain); $i++) {
+        if (strpos($allowedChars, $inputChain[$i]) === false) {
+            return false;
+        }
+    }
+    return true;
+
 }
 
 ?>

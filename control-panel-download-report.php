@@ -10,7 +10,7 @@ requireAuthentication($pdo, "control-panel.php");
 
 $output = fopen('php://output', 'w');
 
-fputcsv($output, ["Session Date", "Session Location", "Engineers", "User Email", "First Name", "Last Name", "Institute", "Team", "Problem Description", "Time Start"]);
+fputcsv($output, ["Session Date", "Session Location", "Engineers", "User Email", "First Name", "Last Name", "Institute", "Team", "Problem Description", "Time Start", "Was Present?"]);
 
 $query = $pdo->query("
     SELECT 
@@ -23,13 +23,16 @@ $query = $pdo->query("
         u.institute,
         u.team,
         a.problem_description,
-        a.time_start
+        a.time_start,
+        a.has_come
     FROM sessions s
     INNER JOIN appointments a ON s.session_date = a.session_id
     INNER JOIN users u ON a.user_id = u.email
     INNER JOIN locations l ON s.session_location = l.location_id
+    WHERE a.canceled = FALSE
     ORDER BY s.session_date, a.time_start
 ");
+
 
 $query->execute();
 $sessions = $query->fetchAll(PDO::FETCH_ASSOC);

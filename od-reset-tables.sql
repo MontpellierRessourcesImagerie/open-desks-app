@@ -40,6 +40,9 @@ CREATE TABLE IF NOT EXISTS appointments (
     problem_description      TEXT         NOT NULL,
     time_start               TIME         NOT NULL,
     images_link              VARCHAR(255),
+    has_come                 BOOLEAN      NOT NULL DEFAULT TRUE,
+    cancel_id                VARCHAR(12)  NOT NULL,
+    canceled                 BOOLEAN      NOT NULL DEFAULT FALSE,
     FOREIGN KEY (user_id)    REFERENCES users(email),
     FOREIGN KEY (session_id) REFERENCES sessions(session_date),
     UNIQUE (user_id, session_id)
