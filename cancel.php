@@ -14,7 +14,7 @@ $cancel_id = $_GET['id'] ?? null;
 $appointment = null;
 $error = null;
 
-if ($cancel_id && isSafeCharChain($cancel_id) && strlen($cancel_id) === 12) {
+if ($cancel_id && isSafeCharChain($cancel_id) && strlen($cancel_id) === 6) {
     $stmt = $pdo->prepare("SELECT a.*, s.session_date 
                            FROM appointments a
                            JOIN sessions s ON a.session_id = s.session_date

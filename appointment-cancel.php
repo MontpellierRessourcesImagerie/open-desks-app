@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $cancel_id = $_POST['cancel_id'] ?? null;
 
-if ($cancel_id && isSafeCharChain($cancel_id) && strlen($cancel_id) === 12) {
+if ($cancel_id && isSafeCharChain($cancel_id) && strlen($cancel_id) === 6) {
     $pdo = connect_db();
     $stmt = $pdo->prepare("SELECT a.*, s.session_date
                             FROM appointments a

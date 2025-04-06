@@ -26,7 +26,7 @@ if (!requiredData($fields)) { exit; }
 if (!checkValidity())       { exit; }
 
 $pdo = connect_db();
-$cancel_id = generateSafeAsciiString(12);
+$cancel_id = generateSafeAsciiString(6);
 $success = addUserAndAppointment($pdo, $cancel_id);
 $infos = getInfos($pdo);
 

@@ -111,7 +111,7 @@ function isSafeFile($target) {
 }
 
 function getSafeCharsList() {
-    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    return 'ABDEFGHJKLMNRTYabdefghjkmnqrsty123456789';
 }
 
 function generateSafeAsciiString($length) {

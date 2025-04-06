@@ -51,6 +51,6 @@
 ```sql
 ALTER TABLE appointments ADD COLUMN has_come BOOLEAN NOT NULL DEFAULT FALSE;
 UPDATE appointments SET has_come = TRUE;
-ALTER TABLE appointments ADD COLUMN cancel_id VARCHAR(12) NOT NULL;
+ALTER TABLE appointments ADD COLUMN cancel_id VARCHAR(6) NOT NULL;
 ALTER TABLE appointments ADD COLUMN canceled BOOLEAN NOT NULL DEFAULT FALSE;
 ```
